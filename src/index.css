@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hdr_btn{
+    @apply border  font-semibold text-neutral-600 hover:text-neutral-800 rounded-md px-4 py-2
+}
+.filterButton{
+    @apply border rounded-sm flex cursor-pointer px-4 h-10 gap-2
+}
+.fitlerIconStyle{
+    @apply self-center h-4
+}
