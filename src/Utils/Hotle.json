@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Elevate your taste: today's special",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "New York",
+    "description": "Enjoy the best of New York's finest cuisine with this special offer. Book now and get a 50% discount on your first meal.",
+    "price": "$50",
+    "type": "Hotel",
+    "duration": 1,
+    "rating": "4.5"
+  },
+  {
+    "title": "Discover Today's Delicacies",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Paris",
+    "description": "Experience the charm of Khulna through this unique rentexperience. Located in the heart of the city, this 1h adventure offers an unforgettable journey through local culture and cuisine.",
+    "price": "$100",
+    "duration": 3,
+    "type": "Rent",
+    "rating": "4.8"
+  },
+  {
+    "title": "Luxury Stay in London",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "London",
+    "description": "Indulge in the luxury of London with our exclusive hotel offer. Enjoy a 5-star experience with complimentary breakfast and spa access.",
+    "price": "$200",
+    "type": "Hotel",
+    "duration": 2,
+    "rating": "4.7"
+  },
+  {
+    "title": "Charming Cottage in the Countryside",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Tuscany",
+    "description": "Escape to the serene countryside of Tuscany. This charming cottage offers a peaceful retreat with stunning views and local wine tasting.",
+    "price": "$150",
+    "type": "Rent",
+    "duration": 5,
+    "rating": "4.9"
+  },
+  {
+    "title": "Explore the Wonders of Tokyo",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Tokyo",
+    "description": "Join our guided tour to explore the vibrant city of Tokyo. Visit historical sites, enjoy local cuisine, and experience the unique culture.",
+    "price": "$300",
+    "type": "Tour",
+    "duration": 7,
+    "rating": "4.6"
+  },
+  {
+    "title": "Beachfront Villa in Bali",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Bali",
+    "description": "Relax in a beachfront villa in Bali. Enjoy the sun, sand, and sea with our exclusive package that includes a private pool and daily breakfast.",
+    "price": "$400",
+    "type": "Hotel",
+    "duration": 4,
+    "rating": "4.8"
+  },
+  {
+    "title": "Cultural Tour of Kyoto",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Kyoto",
+    "description": "Immerse yourself in the rich culture of Kyoto with our guided tour. Visit ancient temples, participate in traditional tea ceremonies, and more.",
+    "price": "$250",
+    "type": "Tour",
+    "duration": 3,
+    "rating": "4.7"
+  },
+  {
+    "title": "Modern Apartment in Berlin",
+    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
+    "location": "Berlin",
+    "description": "Stay in a modern apartment in the heart of Berlin. Enjoy easy access to top attractions, restaurants, and nightlife.",
+    "price": "$120",
+    "type": "Rent",
+    "duration": 6,
+    "rating": "4.5"
+  }
+]
