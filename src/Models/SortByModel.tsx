@@ -1,4 +1,5 @@
-import React from "react";
+import React , {useState} from "react";
+import { dataContext } from "../Context/DataContext";
 
 interface modelPositionInterface {
   top: number;
@@ -15,12 +16,37 @@ function SortByModel({
   sortByModel,
   modalPosition,
 }: SortByModelProps) {
+  const {setHotelData , HotelData} = dataContext();
   function handleModelClose(e) {
     if (e.target.classList.contains("sortModel")) {
       onClose();
     }
   }
   if (!sortByModel) return null;
+
+  const handleSort = (option) => {
+    let sortedItems;
+    switch (option) {
+      case "priceLowToHigh":
+        sortedItems = [...HotelData].sort((a, b) => a.price - b.price);
+        break;
+      case "priceHighToLow":
+        sortedItems = [...HotelData].sort((a, b) => b.price - a.price);
+        break;
+      case "rating":
+        sortedItems = [...HotelData].sort((a, b) => b.rating - a.rating);
+        break;
+      case "duration":
+        sortedItems = [...HotelData].sort((a, b) => a.duration - b.duration);
+        break;
+      default:
+        sortedItems = HotelData;
+    }
+    console.log(sortedItems)
+    setHotelData(sortedItems);
+    onClose();
+  };
+
   return (
     <div
       onClick={(e) => handleModelClose(e)}
@@ -34,11 +60,18 @@ function SortByModel({
         }}
         className=" bg-white flex flex-col  py-4 rounded-md border"
       >
-        <p className="hover:bg-black/10 px-2 py-1 w-full">Price(Low to High)</p>
-        <p className="hover:bg-black/10 py-1 px-2 w-full">Price(High to Low)</p>
-        <p className="hover:bg-black/10 py-1 px-2 w-full">Rating</p>
-        <p className="hover:bg-black/10 py-1 px-2 w-full">Duration</p> 
-
+        <p onClick={()=>handleSort("priceLowToHigh")} className="hover:bg-black/10 px-2 py-1 w-full cursor-pointer">
+          Price(Low to High)
+        </p>
+        <p onClick={()=>handleSort("priceHighToLow")} className="hover:bg-black/10 py-1 px-2 w-full cursor-pointer">
+          Price(High to Low)
+        </p>
+        <p onClick={()=>handleSort("rating")} className="hover:bg-black/10 py-1 px-2 w-full cursor-pointer">
+          Rating
+        </p>
+        <p onClick={()=>handleSort("duration")}  className="hover:bg-black/10 py-1 px-2 w-full cursor-pointer">
+          Duration
+        </p>
       </div>
     </div>
   );
