@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Search, List, Square, Table, ArrowDownUp, Filter, MoveDownLeft } from "lucide-react";
+import { useState } from "react";
+import { Search, List, Square, Table, ArrowDownUp, Filter } from "lucide-react";
 import Kanban from "../components/Kanban";
 import ListComponent from "../components/ListComponent";
 import TableComponent from "../components/TableComponent";
@@ -10,35 +10,37 @@ function Home() {
   const [trackHomeViewChoice, setTrackHomeViewChoice] =
     useState<String>("kanban");
 
-    interface modelPositionInterface{
-      top:number;
-      left:number;
-    }
+  interface modelPositionInterface {
+    top: number;
+    left: number;
+  }
 
-    const [sortByModel , setSortByModel] = useState<boolean>(false);
-    const [filterBy , setFilterByModel] = useState<boolean>(false);
-    const [findModel , setFindModel] = useState<boolean>(false);
-    const [modalPosition, setModalPosition] = useState<modelPositionInterface>({ top: 0, left: 0 });
+  const [sortByModel, setSortByModel] = useState<boolean>(false);
+  const [filterBy, setFilterByModel] = useState<boolean>(false);
+  const [findModel, setFindModel] = useState<boolean>(false);
+  const [modalPosition, setModalPosition] = useState<modelPositionInterface>({
+    top: 0,
+    left: 0,
+  });
 
+  // #TODO: think of freezing the screen when the models get open.
 
-    // #TODO: think of freezing the screen when the models get open.
-  
-    // useEffect(() => {
-    //   if (filterBy || sortByModel || findModel) {
-    //     // Disable scroll
-    //     document.body.style.overflow = "hidden";
-    //   } else {
-    //     // Enable scroll
-    //     document.body.style.overflow = "";
-    //   }
-  
-    //   return () => {
-    //     // Ensure scroll is re-enabled when component unmounts
-    //     document.body.style.overflow = "";
-    //   };
-    // }, [filterBy , sortByModel , findModel]);
+  // useEffect(() => {
+  //   if (filterBy || sortByModel || findModel) {
+  //     // Disable scroll
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     // Enable scroll
+  //     document.body.style.overflow = "";
+  //   }
 
-  const handleSortBy = (e)=>{
+  //   return () => {
+  //     // Ensure scroll is re-enabled when component unmounts
+  //     document.body.style.overflow = "";
+  //   };
+  // }, [filterBy , sortByModel , findModel]);
+
+  const handleSortBy = (e: any) => {
     const rect = e.target.getBoundingClientRect(); // Get button's position
     setModalPosition({
       top: rect.bottom + window.scrollY, // Button's bottom edge
@@ -46,9 +48,9 @@ function Home() {
     });
 
     setSortByModel(true);
-  }
+  };
   return (
-    <div className="w-[90%] mb-10 mx-auto mt-10 h-full">
+    <div className="w-[98%]  mx-auto  h-full">
       <div className="flex justify-between p-4 border-b">
         <div className="flex gap-2 items-center">
           <h1 className="self-center font-bold text-2xl">Sites</h1>
@@ -94,21 +96,35 @@ function Home() {
             <ArrowDownUp className="fitlerIconStyle" />
             <button>Sort By</button>
           </div>
-          <div onClick={()=>setFilterByModel(true)} className="filterButton bg-purple-700 text-white font-medium rounded-md">
+          <div
+            onClick={() => setFilterByModel(true)}
+            className="filterButton bg-purple-700 text-white font-medium rounded-md"
+          >
             <Filter className="fitlerIconStyle" />
             <button>Filter</button>
           </div>
-          <div onClick={()=>setFindModel(true)} className="filterButton bg-purple-700 text-white font-medium rounded-md">
+          <div
+            onClick={() => setFindModel(true)}
+            className="filterButton bg-purple-700 text-white font-medium rounded-md"
+          >
             {/* add durpin */}
             <Search className="fitlerIconStyle" />
             <button>Find Menu</button>
           </div>
-          <SortByModel sortByModel={sortByModel} modalPosition={modalPosition} onClose={()=>setSortByModel(false)}/>
-            <FilterModel filterBy={filterBy} onClose={()=>setFilterByModel(false)}/>
-            <FindModel findModel={findModel} onClose={()=>setFindModel(false)}/>
+          <SortByModel
+            sortByModel={sortByModel}
+            modalPosition={modalPosition}
+            onClose={() => setSortByModel(false)}
+          />
+          <FilterModel
+            filterBy={filterBy}
+            onClose={() => setFilterByModel(false)}
+          />
+          <FindModel
+            findModel={findModel}
+            onClose={() => setFindModel(false)}
+          />
         </div>
-
-
       </div>
 
       {/* lets start for the down one. */}

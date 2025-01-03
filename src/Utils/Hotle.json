@@ -1,25 +1,5 @@
 [
   {
-    "title": "Elevate your taste: today's special",
-    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
-    "location": "New York",
-    "description": "Enjoy the best of New York's finest cuisine with this special offer. Book now and get a 50% discount on your first meal.",
-    "price": "$50",
-    "type": "Hotel",
-    "duration": 1,
-    "rating": "4.5"
-  },
-  {
-    "title": "Discover Today's Delicacies",
-    "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
-    "location": "Paris",
-    "description": "Experience the charm of Khulna through this unique rentexperience. Located in the heart of the city, this 1h adventure offers an unforgettable journey through local culture and cuisine.",
-    "price": "$100",
-    "duration": 3,
-    "type": "Rent",
-    "rating": "4.8"
-  },
-  {
     "title": "Luxury Stay in London",
     "image": "https://static.vecteezy.com/system/resources/previews/032/242/170/large_2x/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo.jpg",
     "location": "London",

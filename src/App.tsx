@@ -1,14 +1,18 @@
-import { useState } from "react";
 import Headers from "./components/Headers";
 import Home from "./pages/Home";
+import SideBar from "./Models/SideBar";
 
 function App() {
-
   return (
-    <>
-    <Headers/>
-      <Home/>
-    </>
+    <div className="flex">
+      <SideBar/>
+      <div
+        className={` transition-all w-full`}
+      >
+        <Headers />
+        <Home />
+      </div>
+    </div>
   );
 }
 
