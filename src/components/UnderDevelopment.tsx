@@ -1,4 +1,3 @@
-import React from 'react'
 
 function UnderDevelopment() {
   return (
@@ -6,4 +5,4 @@ function UnderDevelopment() {
   )
 }
 
-export default UnderDevelopment
+export default UnderDevelopment 

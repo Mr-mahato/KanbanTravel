@@ -1,30 +1,30 @@
-import React , {useState} from "react";
+import React from "react";
 import { dataContext } from "../Context/DataContext";
 
 interface modelPositionInterface {
   top: number;
   left: number;
 }
+
 interface SortByModelProps {
   onClose: () => void;
   sortByModel: boolean;
   modalPosition: modelPositionInterface;
 }
 
-function SortByModel({
-  onClose,
-  sortByModel,
-  modalPosition,
-}: SortByModelProps) {
-  const {setHotelData , HotelData} = dataContext();
-  function handleModelClose(e) {
-    if (e.target.classList.contains("sortModel")) {
+
+function SortByModel({ onClose, sortByModel, modalPosition }: SortByModelProps) {
+  const { setHotelData, HotelData }  = dataContext();
+
+  function handleModelClose(e: React.MouseEvent<HTMLDivElement>) {
+    if ((e.target as HTMLElement).classList.contains("sortModel")) {
       onClose();
     }
   }
+
   if (!sortByModel) return null;
 
-  const handleSort = (option) => {
+  const handleSort = (option: string) => {
     let sortedItems;
     switch (option) {
       case "priceLowToHigh":
@@ -42,16 +42,12 @@ function SortByModel({
       default:
         sortedItems = HotelData;
     }
-    console.log(sortedItems)
     setHotelData(sortedItems);
     onClose();
   };
 
   return (
-    <div
-      onClick={(e) => handleModelClose(e)}
-      className="fixed inset-0 sortModel bg-black/40 top-0 min-h-screen min-w-screen right-0 left-0 z-20  "
-    >
+    <div onClick={handleModelClose} className="fixed inset-0 sortModel bg-black/40 top-0 min-h-screen min-w-screen right-0 left-0 z-20">
       <div
         style={{
           position: "absolute",

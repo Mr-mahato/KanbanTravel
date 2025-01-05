@@ -5,10 +5,8 @@ import SideBar from "./Models/SideBar";
 function App() {
   return (
     <div className="flex">
-      <SideBar/>
-      <div
-        className={` transition-all w-full`}
-      >
+      <SideBar />
+      <div className={`transition-all w-full`}>
         <Headers />
         <Home />
       </div>

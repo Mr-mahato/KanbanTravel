@@ -1,15 +1,16 @@
-interface HomeContentViewInterface{
-  contentModel:boolean;
-  onClose:()=>void;
-  particularHotel:any;
+interface HomeContentViewInterface {
+  contentModel: boolean;
+  onClose: () => void;
+  particularHotel: any;
 }
-function HomeContentView({contentModel , onClose,particularHotel}:HomeContentViewInterface) {
+
+function HomeContentView({ contentModel, onClose, particularHotel }: HomeContentViewInterface) {
   console.log(particularHotel)
 
   if(!contentModel) return null;
 
-  function handleModelClose(e) {
-    if (e.target.classList.contains("contentView")) {
+  function handleModelClose(e: React.MouseEvent<HTMLDivElement>) {
+    if ((e.target as HTMLElement).classList.contains("contentView")) {
       onClose();
     }
   }

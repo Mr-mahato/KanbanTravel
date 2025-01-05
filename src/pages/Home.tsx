@@ -50,21 +50,21 @@ function Home() {
     setSortByModel(true);
   };
   return (
-    <div className="w-[98%]  mx-auto  h-full">
-      <div className="flex justify-between p-4 border-b">
-        <div className="flex gap-2 items-center">
-          <h1 className="self-center font-bold text-2xl">Sites</h1>
-
+    <div className="sm:w-[98%]  mx-auto  h-full">
+      <div className="flex md:flex-row flex-col mt-10 gap-2 justify-between p-4 border-b">
+        {/* left side */}
+        <div className="flex  gap-2 ">
+        <h1 className=" font-bold text-2xl">Sites</h1>
           <div
             onClick={() => setTrackHomeViewChoice("List")}
-            className={`flex border cursor-pointer px-4 rounded-md h-10 ${
+            className={`flex border  cursor-pointer px-4 rounded-md h-10 ${
               trackHomeViewChoice === "List"
                 ? "bg-purple-600 text-white font-medium"
                 : "bg-white"
             }`}
           >
             <List className="self-center h-4" />
-            <button className={`self-center text-sm `}>List</button>
+            <button className={`text-sm sm:flex hidden self-center`}>List</button>
           </div>
 
           <div
@@ -76,7 +76,7 @@ function Home() {
             }`}
           >
             <Square className="self-center h-4" />
-            <button name="kanban w-full">Kanban</button>
+            <button className={`text-sm sm:flex  hidden self-center`}>Kanban</button>
           </div>
           <div
             onClick={() => setTrackHomeViewChoice("table")}
@@ -87,14 +87,14 @@ function Home() {
             }`}
           >
             <Table className="fitlerIconStyle" />
-            <button name="table">Table</button>
+            <button className=" sm:flex hidden self-center">Table</button>
           </div>
         </div>
         {/* right side for the feature */}
         <div className="flex gap-2">
           <div onClick={handleSortBy} className="filterButton">
             <ArrowDownUp className="fitlerIconStyle" />
-            <button>Sort By</button>
+            <button className="sm:flex hidden self-center">Sort By</button>
           </div>
           <div
             onClick={() => setFilterByModel(true)}
@@ -103,14 +103,17 @@ function Home() {
             <Filter className="fitlerIconStyle" />
             <button>Filter</button>
           </div>
+
+          {/* search menu */}
           <div
             onClick={() => setFindModel(true)}
-            className="filterButton bg-purple-700 text-white font-medium rounded-md"
+            className="filterButton bg-purple-700  text-white font-medium rounded-lg"
           >
             {/* add durpin */}
             <Search className="fitlerIconStyle" />
-            <button>Find Menu</button>
+            <button className="text-sm sm:text-md w-full">Find Menu</button>
           </div>
+
           <SortByModel
             sortByModel={sortByModel}
             modalPosition={modalPosition}

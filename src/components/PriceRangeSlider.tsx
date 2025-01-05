@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 
 const PriceRangeSlider = () => {
   const [minValue, setMinValue] = useState<number>(0);
@@ -6,20 +6,19 @@ const PriceRangeSlider = () => {
   const minLimit = 0;
   const maxLimit = 1000;
 
-  const handleMinChange = (e:any) => {
+  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.min(Number(e.target.value), maxValue - 1);
     setMinValue(value);
   };
 
-  const handleMaxChange = (e:any) => {
+  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.max(Number(e.target.value), minValue + 1);
     setMaxValue(value);
   };
 
-  const handleSliderChange = (e:any, type:String) => {
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
     const value = Number(e.target.value);
     if (type === "min") {
-        console.log("trying to slide the minium one.")
       setMinValue(Math.min(value, maxValue - 1));
     } else {
       setMaxValue(Math.max(value, minValue + 1));

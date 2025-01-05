@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ChevronRight,
   ChevronLeft,
@@ -12,24 +12,68 @@ import {
   Blocks,
   ChevronUp,
 } from "lucide-react";
-import PriceRangeSlider from "../components/PriceRangeSlider";
-
+import { dataContext } from "../Context/DataContext";
+import Slider from "@mui/material/Slider";
 function SideBar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(true);
   const [showLocationOption, setShowLocationOption] = useState<boolean>(true);
   const [showPriceOption, setShowPriceOption] = useState<boolean>(true);
   const [showDurationOption, setShowDurationOption] = useState<boolean>(true);
   const [showServicesOption, setShowServicesOption] = useState<boolean>(true);
+  const {
+    selectedLocations,
+    setSelectedDuration,
+    selectedServices,
+    setSelectedServices,
+    setSelectedLocations,
+    selectedDuration,
+    priceRange,
+    setPriceRange
+  } = dataContext();
 
   const toggleSidebar = () => {
-    console.log("is bar being expanded");
     setIsSidebarExpanded(!isSidebarExpanded);
   };
+  const handlePriceChange = (event: any, newValue: number | number[]) => {
+    console.log(event);
+    setPriceRange(newValue as number[]);
+  };
+  const handleLocationChange = (location: string, isChecked: boolean) => {
+    let dummyLocation = selectedLocations;
+    if (isChecked) {
+      dummyLocation = [...dummyLocation, location];
+    } else {
+      dummyLocation = dummyLocation.filter((loc: string) => loc !== location);
+    }
+    setSelectedLocations(dummyLocation);
+  };
+
+  const handleDurationChange = (durn: string) => {
+    const duration = parseInt(durn);
+    setSelectedDuration((prev: any) => {
+      if (prev.includes(duration)) {
+        return prev.filter((dur: number) => dur !== duration);
+      } else {
+        return [...prev, duration];
+      }
+    });
+  };
+
+  const handleServicesChange = (services: string) => {
+    setSelectedServices((prev: string[]) => {
+      if (prev.includes(services)) {
+        return prev.filter((servi) => servi !== services);
+      } else {
+        return [...prev, services];
+      }
+    });
+  };
+
   return (
     <aside
-      className={` flex flex-col pt-1   shadow-md inset-y-0 transition-all ${
-        isSidebarExpanded ? "w-[18rem]" : "w-16"
-      } bg-neutral-100 min-h-fit`}
+      className={`flex flex-col pt-1 sm:relative h-full shadow-md transition-all duration-600 ease-in-out ${
+        isSidebarExpanded ? "sm:w-[18rem] w-full" : "w-16"
+      } bg-neutral-100  min-h-fit `}
     >
       {/* this is for the logo */}
       <div className="py-6 px-4 border-b-2">
@@ -66,7 +110,16 @@ function SideBar() {
           <div className="flex-1 flex flex-col gap-4">
             <div className="flex justify-between">
               <h1 className="font-medium text-lg">Filters</h1>
-              <button className="text-purple-500">Reset All</button>
+              <button
+                onClick={() => {
+                  setSelectedLocations([]);
+                  setSelectedDuration([]);
+                  setSelectedServices([]);
+                }}
+                className="text-purple-500"
+              >
+                Reset All
+              </button>
             </div>
             {/* showing option based on the location */}
             <div className="border-b-2 border-neutral-200 pb-2">
@@ -86,211 +139,144 @@ function SideBar() {
               </div>
               {showLocationOption && (
                 <div className="px-2">
-                  <div>
-                    <input type="checkbox" />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="Dhaka"
-                    >
-                      Dhaka
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="Rangpur"
-                    >
-                      Rangpur
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="Cumilla"
-                    >
-                      Cumilla
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="Khulna"
-                    >
-                      Khulna
-                    </label>
-                  </div>
+                  {["London", "Tokyo", "Bali", "Nepal"].map((location) => (
+                    <div key={location}>
+                      <input
+                        type="checkbox"
+                        checked={selectedLocations.includes(location)}
+                        onChange={(e) =>
+                          handleLocationChange(location, e.target.checked)
+                        } // Pass the checked state
+                      />
+                      <label className="text-neutral-800 font-medium ml-2">
+                        {location}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               )}
-            </div>
 
-            {/* showing optino based on the price */}
-            <div className="border-b-2 border-neutral-200 pb-2">
-              <div className="flex justify-between">
-                <h1 className="font-medium text-lg">Price</h1>
-                {!showPriceOption ? (
-                  <ChevronDown
-                    onClick={() => setShowPriceOption(true)}
-                    className="cursor-pointer"
-                  />
-                ) : (
-                  <ChevronUp
-                    onClick={() => setShowPriceOption(false)}
-                    className="cursor-pointer"
-                  />
+              {/* showing optino based on the price */}
+              <div className="border-b-2 border-neutral-200 pb-2">
+                <div className="flex justify-between">
+                  <h1 className="font-medium text-lg">Price</h1>
+                  {!showPriceOption ? (
+                    <ChevronDown
+                      onClick={() => setShowPriceOption(true)}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <ChevronUp
+                      onClick={() => setShowPriceOption(false)}
+                      className="cursor-pointer"
+                    />
+                  )}
+                </div>
+                {showPriceOption && (
+                  <div className="px-2">
+                    
+                    <Slider
+                      value={priceRange}
+                      onChange={handlePriceChange}
+                      valueLabelDisplay="auto"
+                      min={0}
+                      max={1000}
+                    />
+                  </div>
                 )}
               </div>
-              {showPriceOption && (
-                <div className="px-2">
-                  {/* <div className="flex">
-                  <input
-                    className="w-20 outline-none rounded-md border border-purple-600 p-1"
-                    type="number"
-                    name="from"
-                    id="from"
-                  />{" "}
-                  -
-                  <input type="number" name="to" id="to" />
-                </div> */}
-                  <PriceRangeSlider />
+              {/* showing the option based on the Durations */}
+              <div className="border-b-2 border-neutral-200 pb-2">
+                <div className="flex justify-between">
+                  <h1 className="text-lg font-medium ">Durations</h1>
+                  {!showDurationOption ? (
+                    <ChevronDown
+                      onClick={() => setShowDurationOption(true)}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <ChevronUp
+                      onClick={() => setShowDurationOption(false)}
+                      className="cursor-pointer"
+                    />
+                  )}
                 </div>
-              )}
-            </div>
-            {/* showing the option based on the Durations */}
-            <div className="border-b-2 border-neutral-200 pb-2">
-              <div className="flex justify-between">
-                <h1 className="text-lg font-medium ">Durations</h1>
-                {!showDurationOption ? (
-                  <ChevronDown
-                    onClick={() => setShowDurationOption(true)}
-                    className="cursor-pointer"
-                  />
-                ) : (
-                  <ChevronUp
-                    onClick={() => setShowDurationOption(false)}
-                    className="cursor-pointer"
-                  />
+                {showDurationOption && (
+                  <div className="px-2">
+                    {["1", "2", "3", "4"].map((duration) => (
+                      <div key={duration}>
+                        <input
+                          type="checkbox"
+                          checked={selectedDuration.includes(+duration)}
+                          onChange={() => handleDurationChange(duration)}
+                        />
+                        <label className="text-neutral-800 font-medium ml-2">
+                          {duration}h
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
-              {showDurationOption && (
-                <div className="px-2">
-                  <div>
-                    <input type="checkbox" value={1} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="1-h"
-                    >
-                      1h
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={2} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="2-h"
-                    >
-                      2h
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={3} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="3-h"
-                    >
-                      3h
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={4} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="4-h"
-                    >
-                      4h
-                    </label>
-                  </div>
-                </div>
-              )}
-            </div>
 
-            {/* showing the option based on the services */}
-            <div className="border-b-2 border-neutral-200 pb-2">
-              <div className="flex justify-between">
-                <h1 className="font-medium text-lg">Services</h1>
-                {!showServicesOption ? (
-                  <ChevronDown
-                    onClick={() => setShowServicesOption(true)}
-                    className="cursor-pointer"
-                  />
-                ) : (
-                  <ChevronUp
-                    onClick={() => setShowServicesOption(false)}
-                    className="cursor-pointer"
-                  />
+              {/* showing the option based on the services */}
+              <div className="border-b-2 border-neutral-200 pb-2">
+                <div className="flex justify-between">
+                  <h1 className="font-medium text-lg">Services</h1>
+                  {!showServicesOption ? (
+                    <ChevronDown
+                      onClick={() => setShowServicesOption(true)}
+                      className="cursor-pointer"
+                    />
+                  ) : (
+                    <ChevronUp
+                      onClick={() => setShowServicesOption(false)}
+                      className="cursor-pointer"
+                    />
+                  )}
+                </div>
+                {showServicesOption && (
+                  <div className="px-2">
+                    {["Rent", "Tour", "Hotel", "Accommodation"].map(
+                      (services) => (
+                        <div key={services}>
+                          <input
+                            type="checkbox"
+                            checked={selectedServices.includes(services)}
+                            onChange={() => handleServicesChange(services)}
+                          />
+                          <label className="text-neutral-800 font-medium ml-2">
+                            {services}
+                          </label>
+                        </div>
+                      )
+                    )}
+
+                    {/* start here */}
+                  </div>
                 )}
               </div>
-              {showServicesOption && (
-                <div className="px-2">
-                  <div>
-                    <input type="checkbox" value={"Hotels"} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="1-h"
-                    >
-                      Hotels
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={"Rent"} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="2-h"
-                    >
-                      Rent
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={"Tour"} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="3-h"
-                    >
-                      Tour
-                    </label>
-                  </div>
-                  <div>
-                    <input type="checkbox" value={"Accommodation"} />
-                    <label
-                      className="text-neutral-800 font-medium ml-2"
-                      htmlFor="4-h"
-                    >
-                      Accommodation
-                    </label>
-                  </div>
-                </div>
-              )}
             </div>
-          </div>
 
-          <div className="justify-self-end flex-2 p-2  ">
-            <div className="border-t border-b py-4 border-neutral-400 gap-4 flex flex-col">
-              <div className="flex gap-4 cursor-pointer text-neutral-600 hover:text-black">
-                <Blocks className="w-5 h-5" />
-                <h1 className="self-center text-lg  font-medium">
-                  Integrations
+            <div className="justify-self-end flex-2 p-2  ">
+              <div className="border-t border-b py-4 border-neutral-400 gap-4 flex flex-col">
+                <div className="flex gap-4 cursor-pointer text-neutral-600 hover:text-black">
+                  <Blocks className="w-5 h-5" />
+                  <h1 className="self-center text-lg  font-medium">
+                    Integrations
+                  </h1>
+                </div>
+                <div className="flex gap-4 cursor-pointer text-neutral-600 hover:text-black">
+                  <Settings className="w-5 h-5" />
+                  <h1 className="self-center text-lg  font-medium">Settings</h1>
+                </div>
+              </div>
+              <div className="flex gap-4  cursor-pointer text-neutral-600 hover:text-black  mt-4">
+                <UserRoundPen className="w-5 h-5" />
+                <h1 className="self-center text-lg font-medium">
+                  Travel Team's
                 </h1>
               </div>
-              <div className="flex gap-4 cursor-pointer text-neutral-600 hover:text-black">
-                <Settings className="w-5 h-5" />
-                <h1 className="self-center text-lg  font-medium">Settings</h1>
-              </div>
-            </div>
-            <div className="flex gap-4  cursor-pointer text-neutral-600 hover:text-black  mt-4">
-              <UserRoundPen className="w-5 h-5" />
-              <h1 className="self-center text-lg font-medium">Travel Team's</h1>
             </div>
           </div>
         </div>

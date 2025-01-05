@@ -1,8 +1,7 @@
-import React from "react";
 import { CircleHelp, ChevronDown } from "lucide-react";
 function Headers() {
   return (
-    <div className="flex justify-between relative p-6 border-b ">
+    <div className=" sm:flex hidden justify-between relative p-6 border-b ">
       {/* left side */}
 
       <div className="left flex flex-row gap-2 justify-center items-center">
